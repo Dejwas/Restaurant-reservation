@@ -20,9 +20,6 @@
                     <input type="checkbox" name="remember" class="rounded-sm border border-slate-400" />
                     <label for="remember">Remember me</label>
                 </div>
-                <div>
-                    <a href="#" class="text-indigo-600 hover:underline">Forgot password?</a>
-                </div>
             </div>
 
             <x-button class="w-full bg-green-50">Login</x-button>
