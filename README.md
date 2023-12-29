@@ -4,6 +4,7 @@ Project allows users to create restaurants and make the reservations.
 ## Project Features
 Main feature of the project is to allocate available restaurant tables for the reservation, when it is booked. This is achieved by filtering the available tables for the requested time, and then calculating the best-match tables (this is only a thing if restaurant have different size tables available) for the requested amount of people. 
 Project also allows authenticated users (only seeder users are available, there is currently no registration due to the fact that reservation itself does not require authentication) to create new restaurants, with custom table sizes for future reservations. Authenticated users can also see restaurant list with ability to see all the future/past reservation for the restaurant.
+Most of the code can be seen on the [main commit](https://github.com/Dejwas/Restaurant-reservation/commit/efb19a5bd96be5c982d56563bafffd85aa21ea61).
 
 ## How to run the Project
 1. Clone the repository.
@@ -21,6 +22,7 @@ Project also allows authenticated users (only seeder users are available, there 
 ## Challenges and Solutions
 - Main challenge was to correctly select required amount of seats for the reservation. This was achieved with recursion, calculating how many guests needs to be seated, and either returning the table that matches the request, or remembering the largest available table and recursively calling the same calculation, passing the available tables without the one that was put aside. 
 - Another challange was to inform user when there is no tables available for the requested reservation. This was achieved with Livewire component, which calls the repository and checks currently available tables each time user makes a change on reservation place, time or duration. 
+- Assuring that the system is working correctly was yet another challange. Firstly most of the cases were tested manually via the UI, but eventually tests were written to cover most of the possible cases. Pest testing framework was chosen to do that, and over 92% of code were covered by tests.
   
 ## Future Improvements
 - While testing, it was noticed that the table allocation function does not always selects optimal solution for the restaurant. For example, if there are 3 available tables (tabla A with 4 seats, table B with 6 seats and table C with 8 seats), a reservation for 10 guests will get tables A and C (largest table, and then lowest that completes the request). Optimal solution would be to alocate tables A and B for this reservation, and keep table C for future reservations, but this solution requires a lot of computing power for bigger restaurants (if, we say, restaurant have 30 tables, we would need to calculate every possible combination of the tables to find the best match). 
